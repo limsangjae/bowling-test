@@ -29,6 +29,7 @@
 	<context:component-scan base-package="com.my.bowling.mapper" />
 	<context:component-scan base-package="com.my.bowling.service" />
 	<context:component-scan base-package="com.my.bowling.exception" />
+	<context:component-scan base-package="com.my.bowling.commons.paging"/>
 	
 	
 	

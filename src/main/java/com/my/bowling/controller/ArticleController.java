@@ -25,7 +25,6 @@ public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
 	
-
 	
 	//등록 페이지 이동
 	@GetMapping("/write")
@@ -55,6 +54,14 @@ public class ArticleController {
 		model.addAttribute("articles", articleService.listAll());
 		
 		return "/article/list";
+	}
+	@GetMapping("/listCriteria")
+	public String listCriteria(Model model, Criteria criteria) throws Exception{
+		
+		log.info("listCriteria............");
+		model.addAttribute("articles", articleService.listCriteria(criteria));
+		
+		return "/article/list_criteria";
 	}
 	
 	//조회 페이지 이동
@@ -97,77 +104,6 @@ public class ArticleController {
 		
 		return "redirect:/article/list";
 	}
-	
-	@GetMapping("/listCriteria")
-	public String listCriteria(Model model, Criteria criteria) throws Exception{
-		
-		log.info("listCriteria............");
-		model.addAttribute("articles", articleService.listCriteria(criteria));
-		
-		return "/article/list_criteria";
-	}
-	
-	@GetMapping("/listPaging")
-	public String listPaging(Model model, Criteria criteria) throws Exception{
-		
-		log.info("listPaging............");
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCriteria(criteria);
-		pageMaker.setTotalCount(articleService.countArticles(criteria));
-		
-			
-		model.addAttribute("articles", articleService.listCriteria(criteria));
-		model.addAttribute("pageMaker", pageMaker);
-		
-		return "/article/list_paging";
-	}
-	
-	@GetMapping("/readPaging")
-	public String readPaging(@RequestParam("articleNo") int articleNo,
-			@ModelAttribute("criteria") Criteria criteria, Model model) throws Exception{
-		
-		model.addAttribute("article", articleService.read(articleNo));
-		
-		return "/article/read_paging";
-	}
-	
-	@GetMapping("/modifyPaging")
-	public String modifyGetPaging(@RequestParam("articleNo") int articleNo,
-			@ModelAttribute("criteria") Criteria criteria, Model model) throws Exception{
-		
-		log.info("modifyGetPaging...");
-		model.addAttribute("article", articleService.read(articleNo));
-		
-		return "/article/modify_paging";
-	}
-	
-	@PostMapping("/modifyPaging")
-	public String modifyPostPaging(ArticleVO articleVO, Criteria criteria, RedirectAttributes redirect) throws Exception {
-		
-		log.info("modifyPostPaging...");
-		articleService.update(articleVO);
-		redirect.addAttribute("page", criteria.getPage());
-		redirect.addAttribute("perPageNum",criteria.getPerPageNum());
-		redirect.addFlashAttribute("msg", "modeSuccess");
-		
-		return "redirect:/article/listPaging";
-	}
-	
-	@PostMapping("/removePaging")
-	public String removePaging(@RequestParam("articleNo") int articleNo,
-			Criteria criteria, RedirectAttributes redirect) throws Exception {
-		
-		log.info("remove...");
-		articleService.delete(articleNo);
-		redirect.addAttribute("page", criteria.getPage());
-		redirect.addAttribute("perPageNum",criteria.getPerPageNum());
-		redirect.addFlashAttribute("msg", "delSuccess");
-		
-		return "redirect:/article/listPaging";
-	}
-	
-	
 	
 	
 }

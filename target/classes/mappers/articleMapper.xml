@@ -40,16 +40,16 @@
 	</select>
 	
 	
-<!-- 	<select id="listPaging" resultMap="ArticleResultMap"> -->
-<!--    		SELECT ARTICLE_NO, TITLE, CONTENT, WRITER, REGDATE, VIEWCNT -->
-<!-- 		FROM ( -->
-<!-- 		        SELECT ROW_NUMBER() OVER (ORDER BY ARTICLE_NO) NUM -->
-<!-- 		             , A.* -->
-<!-- 		          FROM TB_ARTICLE A -->
-<!-- 		         ORDER BY ARTICLE_NO -->
-<!-- 		        )  -->
-<!-- 		 WHERE NUM BETWEEN #{page} AND (#{page} + 10) -->
-<!-- 	</select> -->
+	<select id="listPaging" resultMap="ArticleResultMap">
+   		SELECT ARTICLE_NO, TITLE, CONTENT, WRITER, REGDATE, VIEWCNT
+		FROM (
+		        SELECT ROW_NUMBER() OVER (ORDER BY ARTICLE_NO) NUM
+		             , A.*
+		          FROM TB_ARTICLE A
+		         ORDER BY ARTICLE_NO
+		        ) 
+		 WHERE NUM BETWEEN #{page} AND (#{page} + 10)
+	</select>
 	
 	
 	<select id="listCriteria" resultMap="ArticleResultMap">
@@ -62,7 +62,7 @@
 		        ) 
 		 WHERE NUM BETWEEN #{pageStart} AND (#{pageStart}+#{perPageNum})
 	</select>
-	<!-- perPageNum 1페이지당 보여줄 게시글 개수
+	<!-- perPageNum 1페이지당 보여줄 게시글 개수 현재 하드로 10이라고 박혀있음
 		pageStart 페이지에 시작 게시물번호
 	 -->
 	
@@ -74,8 +74,60 @@
 		]]>
 	</select>
 	
+	<select id="listSearch" resultMap="ArticleResultMap">
+	    SELECT ARTICLE_NO,TITLE,CONTENT,WRITER,REGDATE,VIEWCNT
+	    FROM (
+		        SELECT ROW_NUMBER() OVER (ORDER BY ARTICLE_NO) NUM
+		             , A.*
+		          FROM TB_ARTICLE A
+	     	<where> <include refid="search"/> </where>
+		         ORDER BY ARTICLE_NO
+		        ) 
+	    WHERE (NUM BETWEEN #{pageStart} AND (#{pageStart}+#{perPageNum}))
+	</select>
 	
+	<select id="countSearchedArticles" resultType="int">
+	    <![CDATA[
+	    SELECT
+	        COUNT(ARTICLE_NO)
+	    FROM TB_ARTICLE
+	    WHERE ARTICLE_NO > 0
+	    ]]>
+	    <include refid="search"/>
+	</select>
 	
+	<sql id="search">
+	    <if test="searchType != null">
+	        <if test="searchType == 't'.toString()">
+	            AND title LIKE  '%' || #{keyword} || '%'
+	        </if>
+	        <if test="searchType == 'c'.toString()">
+	            AND content LIKE '%' || #{keyword} || '%'
+	        </if>
+	        <if test="searchType == 'w'.toString()">
+	            AND writer LIKE '%' || #{keyword} || '%'
+	        </if>
+	        <if test="searchType == 'tc'.toString()">
+	            AND (
+	                title LIKE '%' || #{keyword} || '%'
+	                OR content LIKE '%' || #{keyword} || '%'
+	            )
+	        </if>
+	        <if test="searchType == 'cw'.toString()">
+	            AND (
+	                content LIKE '%' || #{keyword} || '%'
+	                OR writer LIKE '%' || #{keyword} || '%'
+	            )
+	        </if>
+	        <if test="searchType == 'tcw'.toString()">
+	            AND (
+	                title LIKE '%' || #{keyword} || '%'
+	                OR content LIKE '%' || #{keyword} || '%'
+	                OR writer LIKE '%' || #{keyword} || '%'
+	            )
+	        </if>
+	    </if>
+	</sql>
 	
 	<resultMap id="ArticleResultMap" type="ArticleVO">
 		<id property="articleNo" column="ARTICLE_NO"/>

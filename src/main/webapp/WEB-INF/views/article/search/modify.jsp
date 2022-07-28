@@ -6,16 +6,16 @@ This is a starter template page. Use this page to start your new project from
 scratch. This page gets rid of all links and provides the needed markup only.
 -->
 <html lang="ko">
-<%@ include file = "../include/head.jsp" %>
+<%@ include file = "../../include/head.jsp" %>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
   <!-- Navbar -->
-  <%@ include file = "../include/main_header.jsp" %>
+  <%@ include file = "../../include/main_header.jsp" %>
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <%@ include file = "../include/left_column.jsp" %>
+  <%@ include file = "../../include/left_column.jsp" %>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -47,9 +47,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                <h3 class="card-title">게시글 작성</h3>
 		            </div>
 		            <div class="card-body">
-					  <input type="hidden" name="article_no" value="${article.article_no}">
-					  <input type="hidden" name="page" value="${criteria.page}">
-					  <input type="hidden" name="perPageNum" value="${criteria.perPageNum}">
+				        <input type="hidden" name="articleNo" value="${article.articleNo}">
+				        <input type="hidden" name="page" value="${searchCriteria.page}">
+				        <input type="hidden" name="perPageNum" value="${searchCriteria.perPageNum}">
+				        <input type="hidden" name="searchType" value="${searchCriteria.searchType}">
+				        <input type="hidden" name="keyword" value="${searchCriteria.keyword}">
 					  <div class="form-group">
 					    <label for="title">제목</label> 
 					    <input class="form-control" id="title" name="title" placeholder="제목을 입력해주세요" value="${article.title}">
@@ -90,12 +92,12 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <%@ include file = "../include/main_footer.jsp" %>
+  <%@ include file = "../../include/main_footer.jsp" %>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
-  <%@ include file = "../include/plugin_js.jsp" %>
+  <%@ include file = "../../include/plugin_js.jsp" %>
 </body>
 <script>
 $(document).ready(function () {
@@ -112,7 +114,10 @@ $(document).ready(function () {
     });
 
     $(".listBtn").on("click", function () {
-        self.location = "${path}/article/listPaging?page=${criteria.page}&perPageNum=${criteria.perPageNum}";
+        self.location = "${path}/article/paging/search/list?page=${searchCriteria.page}"
+            + "&perPageNum=${searchCriteria.perPageNum}"
+            + "&searchType=${searchCriteria.searchType}"
+            + "&keyword=${searchCriteria.keyword}";
     });
 
 });

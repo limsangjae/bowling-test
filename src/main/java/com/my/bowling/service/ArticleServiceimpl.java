@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.my.bowling.commons.paging.Criteria;
 import com.my.bowling.commons.paging.PageMaker;
+import com.my.bowling.commons.paging.SearchCriteria;
 import com.my.bowling.domain.dao.ArticleDAO;
 import com.my.bowling.domain.vo.ArticleVO;
 
@@ -49,6 +50,16 @@ public class ArticleServiceimpl implements ArticleService{
 	@Override
 	public int countArticles(Criteria criteria) throws Exception {
 		return articleDAO.countArticles(criteria);
+	}
+
+	@Override
+	public List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception {
+		return articleDAO.listSearch(searchCriteria);
+	}
+
+	@Override
+	public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
+		return articleDAO.countSearchedArticles(searchCriteria);
 	}
 	
 }

@@ -6,18 +6,27 @@ import org.springframework.stereotype.Service;
 
 import com.my.bowling.commons.paging.Criteria;
 import com.my.bowling.commons.paging.PageMaker;
+import com.my.bowling.commons.paging.SearchCriteria;
 import com.my.bowling.domain.vo.ArticleVO;
 
 @Service
 public interface ArticleService {
-	public void create(ArticleVO articleVO) throws Exception;
-	public ArticleVO read(int articleNo) throws Exception;
-	public void update(ArticleVO articleVO) throws Exception;
-	public void delete(int articleNo) throws Exception;
-	public List<ArticleVO> listAll() throws Exception;
+	void create(ArticleVO articleVO) throws Exception;
 	
-	public List<ArticleVO> listCriteria(Criteria criteria) throws Exception;
+	ArticleVO read(int articleNo) throws Exception;
 	
-	public int countArticles(Criteria criteria) throws Exception;
+	void update(ArticleVO articleVO) throws Exception;
+	
+	void delete(int articleNo) throws Exception;
+	
+	List<ArticleVO> listAll() throws Exception;
+	
+	List<ArticleVO> listCriteria(Criteria criteria) throws Exception;
+	
+	int countArticles(Criteria criteria) throws Exception;
+	
+	List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception;
+	
+	int countSearchedArticles(SearchCriteria searchCriteria) throws Exception;
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.my.bowling.commons.paging.Criteria;
+import com.my.bowling.commons.paging.SearchCriteria;
 import com.my.bowling.domain.vo.ArticleVO;
 import com.my.bowling.mapper.ArticleMapper;
 
@@ -61,6 +62,16 @@ public class ArticleDAOimpl implements ArticleDAO {
 	@Override
 	public int countArticles(Criteria criteria) throws Exception {
 		return articleMapper.countArticles(criteria);
+	}
+
+	@Override
+	public List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception {
+		return articleMapper.listSearch(searchCriteria);
+	}
+
+	@Override
+	public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
+		return articleMapper.countSearchedArticles(searchCriteria);
 	}
 
 }
