@@ -6,60 +6,59 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.my.bowling.commons.paging.Criteria;
-import com.my.bowling.commons.paging.PageMaker;
 import com.my.bowling.commons.paging.SearchCriteria;
-import com.my.bowling.domain.dao.ArticleDAO;
 import com.my.bowling.domain.vo.ArticleVO;
+import com.my.bowling.mapper.ArticleMapper;
 
 @Service
 public class ArticleServiceimpl implements ArticleService{
 
 	@Autowired
-	ArticleDAO articleDAO;
+	ArticleMapper articleMapper;
 
 	@Override
 	public void create(ArticleVO articleVO) throws Exception {
-		articleDAO.create(articleVO);
+		articleMapper.create(articleVO);
 	}
-
+ 
 	@Override
 	public ArticleVO read(int articleNo) throws Exception {
-		return articleDAO.read(articleNo);
+		return articleMapper.read(articleNo);
 	}
 
 	@Override
 	public void update(ArticleVO articleVO) throws Exception {
-		articleDAO.update(articleVO);
+		articleMapper.update(articleVO);
 	}
 
 	@Override
 	public void delete(int articleNo) throws Exception {
-		articleDAO.delete(articleNo);
+		articleMapper.delete(articleNo);
 	}
 
 	@Override
 	public List<ArticleVO> listAll() throws Exception {
-		return articleDAO.listAll();
+		return articleMapper.listAll();
 	}
 
 	@Override
 	public List<ArticleVO> listCriteria(Criteria criteria) throws Exception {
-		return articleDAO.listCriteria(criteria);
+		return articleMapper.listCriteria(criteria);
 	}
 
 	@Override
 	public int countArticles(Criteria criteria) throws Exception {
-		return articleDAO.countArticles(criteria);
+		return articleMapper.countArticles(criteria);
 	}
 
 	@Override
 	public List<ArticleVO> listSearch(SearchCriteria searchCriteria) throws Exception {
-		return articleDAO.listSearch(searchCriteria);
+		return articleMapper.listSearch(searchCriteria);
 	}
 
 	@Override
 	public int countSearchedArticles(SearchCriteria searchCriteria) throws Exception {
-		return articleDAO.countSearchedArticles(searchCriteria);
+		return articleMapper.countSearchedArticles(searchCriteria);
 	}
 	
 }

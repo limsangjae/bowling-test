@@ -3,5 +3,6 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.my.bowling.domain.vo.ArticleVO" alias="ArticleVO"/>
+		<typeAlias type="com.my.bowling.domain.vo.ReplyVO" alias="ReplyVO"/>
 	</typeAliases>
 </configuration>

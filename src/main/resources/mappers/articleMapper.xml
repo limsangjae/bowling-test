@@ -3,7 +3,7 @@
 <mapper namespace="com.my.bowling.mapper.ArticleMapper">
 	<insert id="create">
 		<selectKey keyProperty="articleNo" order="BEFORE" resultType="int">
-			SELECT SEQ_BOWLING.NEXTVAL FROM DUAL		
+			SELECT SEQ_TB_ARTICLE.NEXTVAL FROM DUAL		
 		</selectKey>
 		INSERT INTO TB_ARTICLE (
 			ARTICLE_NO, TITLE, CONTENT, WRITER, VIEWCNT

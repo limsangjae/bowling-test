@@ -24,7 +24,7 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.my.bowling.controller" />
-	<context:component-scan base-package="com.my.bowling.domain.dao" />
+<!-- 	<context:component-scan base-package="com.my.bowling.domain.dao" /> -->
 	<context:component-scan base-package="com.my.bowling.domain.vo" />
 	<context:component-scan base-package="com.my.bowling.mapper" />
 	<context:component-scan base-package="com.my.bowling.service" />

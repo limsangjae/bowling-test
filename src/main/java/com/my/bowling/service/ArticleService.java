@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.my.bowling.commons.paging.Criteria;
-import com.my.bowling.commons.paging.PageMaker;
 import com.my.bowling.commons.paging.SearchCriteria;
 import com.my.bowling.domain.vo.ArticleVO;
 
