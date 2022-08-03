@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -87,7 +88,7 @@ public class ReplyController {
 		return entity;
 	}
 	
-	
+	@PutMapping("/{replyNo}")
 	@PatchMapping("/{replyNo}")
 	public ResponseEntity<String> update(@PathVariable("replyNo") Integer replyNo,@RequestBody ReplyVO replyVO){
 		ResponseEntity<String> entity = null;
@@ -103,7 +104,7 @@ public class ReplyController {
 		return entity;
 	}
 	
-	@DeleteMapping("/replyNo")
+	@DeleteMapping("/{replyNo}")
 	public ResponseEntity<String> delete(@PathVariable("replyNo") Integer replyNo){
 		ResponseEntity<String> entity = null;
 		

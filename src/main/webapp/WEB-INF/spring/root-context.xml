@@ -26,6 +26,12 @@
 		<property name="mapperLocations" value="classpath:mappers/*.xml"/>
 		<property name="configLocation" value="classpath:config/config.xml"></property>
 	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven/>
 		
 	<context:component-scan base-package="com.my.bowling.controller" />
 	<context:component-scan base-package="com.my.bowling.domain.vo" />

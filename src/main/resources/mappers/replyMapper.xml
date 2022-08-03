@@ -10,13 +10,13 @@
     </select>
 
     <insert id="create">
-    	<selectKey keyProperty="articleNo" order="BEFORE" resultType="int">
-			SELECT SEQ_TB_ARTICLE.NEXTVAL FROM DUAL		
+    	<selectKey keyProperty="replyNo" order="BEFORE" resultType="int">
+			SELECT SEQ_TB_REPLY.NEXTVAL FROM DUAL		
 		</selectKey>
         INSERT INTO TB_REPLY (
-            ARTICLE_NO, REPLY_TEXT, REPLY_WRITER
+            ARTICLE_NO, REPLY_NO, REPLY_TEXT, REPLY_WRITER
         ) VALUES (
-            #{articleNo}, #{replyText}, #{replyWriter}
+            #{articleNo}, #{replyNo}, #{replyText}, #{replyWriter}
         )
     </insert>
 

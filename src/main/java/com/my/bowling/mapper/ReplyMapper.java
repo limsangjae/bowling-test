@@ -2,6 +2,8 @@ package com.my.bowling.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.my.bowling.commons.paging.Criteria;
 import com.my.bowling.domain.vo.ReplyVO;
 
@@ -15,7 +17,7 @@ public interface ReplyMapper {
 	
 	void delete(Integer replyNo) throws Exception;
 	
-	List<ReplyVO> listPaging(Integer articleNo, Criteria criteria) throws Exception;
+	List<ReplyVO> listPaging(@Param("articleNo")Integer articleNo,@Param("criteria")Criteria criteria) throws Exception;
 	
 	int countReplies(Integer aritcleNo) throws Exception;
 }

@@ -67,7 +67,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
 		                <button type="submit" class="btn btn-danger delBtn"><i class="fa fa-trash"></i> 삭제</button>
 		            </div>
 		        </div>
+		        
 		    </div>
+		    
+			</div>
+
 		</div>
       </div><!-- /.container-fluid -->
     </div>
@@ -116,4 +120,5 @@ $(document).ready(function () {
 
 });
 </script>
+
 </html>
